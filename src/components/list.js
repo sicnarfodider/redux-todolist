@@ -1,12 +1,19 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
+import {getItem} from '../actions';
+import ListItem from './list-item';
 
 
 class List extends React.Component{
+
+  componentDidMount(){
+    this.props.getItem();
+  }
+
   render(){
     const list= this.props.list.map((list,i)=>{
-      return <li className="list-group-item" key={i}>{list.title}</li>
+      return <ListItem {...list}  key={i} />
     })
     return(
       <div>
@@ -31,4 +38,4 @@ function mapStateToProps(state){
   }
 }
 
-export default connect(mapStateToProps)(List);
+export default connect(mapStateToProps,{getItem})(List);

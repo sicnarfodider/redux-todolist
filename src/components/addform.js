@@ -20,9 +20,11 @@ class AddForm extends React.Component{
 
   handleAddItem(values){
     console.log('form submit with', values);
-    this.props.addItem(values)
+    this.props.addItem(values).then(()=>{
+        this.props.history.push('/');
+    });
 
-    this.props.history.push('/');
+
   }
 
   render(){
