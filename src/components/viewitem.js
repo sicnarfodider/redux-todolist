@@ -15,11 +15,10 @@ class ViewItem extends React.Component{
         });
     }
     updateItem(){
-        this.props.updateItem(this.props.match.params.id)
-        this.props.getSingle(this.props.match.params.id)
+        this.props.updateItem(this.props.match.params.id).then(()=>this.props.getSingle(this.props.match.params.id))
+
     }
     render(){
-        console.log("props",this.props);
         if(!this.props.single){
             return <h1>Loading...</h1>
         }
@@ -36,10 +35,10 @@ class ViewItem extends React.Component{
                 <h4>Time Created: {timeCreated}</h4>
                 <h4>Time Completed: {this.props.time ? this.props.time : ""} </h4>
                 <h4>Status: {this.props.single.complete ? "Complete" : "To Be Done"}</h4>
-                <button onClick={this.deleteItem.bind(this)} className="btn btn-outline-danger">DELETE TASK</button>
+                <button onClick={this.deleteItem.bind(this)} className="float-right btn btn-outline-danger">DELETE TASK</button>
                 <div className="form-group">
                     <label>Complete</label>
-                    <input onClick={this.updateItem.bind(this)} type="checkbox"/>
+                    <input disabled onClick={this.updateItem.bind(this)} type="checkbox"/>
                 </div>
                 <div className="modal" tabIndex="-1" role="dialog">
                      <div className="modal-dialog" role="document">

@@ -6,21 +6,12 @@ import {updateItem} from '../actions';
 
 
 class ListItem extends React.Component{
-
-
-
-
     render(){
-        const complete = this.props.complete ? <div className="text-right"><span><strong>CURRENT STATUS</strong> Task has been Completed on {this.props.time}</span></div> :
-        <div className="form-check has-success text-right">
-            <label className="form-check-label">
-            <input onClick={()=>{this.props.updateItem(this.props._id)}} type="checkbox" className="form-check-input" id="checkboxSuccess" value="option1"/>
-                Complete Task
-            </label>
-        </div>
+        const stylesComplete={backgroundColor: "lightpink", color: "white"};
+        const stylesIncomplete={backgroundColor: "lightblue",color: "white"};
         return(
-            <li className="list-group-item" ><Link to={`/item/${this.props._id}`}>{this.props.title}</Link>
-                {complete}
+            <li style={this.props.complete? stylesComplete : stylesIncomplete} className="list-group-item" ><Link to={`/item/${this.props._id}`}>{this.props.title}</Link>
+                <div className="text-right"><span><strong>CURRENT STATUS : </strong>{this.props.complete ? "COMPLETED" : "NOT DONE"}</span></div>
             </li>
         )
     }
