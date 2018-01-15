@@ -38,7 +38,7 @@ class ViewItem extends React.Component{
                 <button onClick={this.deleteItem.bind(this)} className="float-right btn btn-outline-danger">DELETE TASK</button>
                 <div className="form-group">
                     <label>Complete</label>
-                    <input disabled onClick={this.updateItem.bind(this)} type="checkbox"/>
+                    <input disabled aria-disabled={this.props.single.complete ? "true": "false"} onClick={this.updateItem.bind(this)}  type="checkbox"/>
                 </div>
                 <div className="modal" tabIndex="-1" role="dialog">
                      <div className="modal-dialog" role="document">
