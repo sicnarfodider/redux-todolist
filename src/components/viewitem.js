@@ -1,7 +1,7 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 import { connect } from 'react-redux';
-import { getSingle, deleteItem } from '../actions';
+import { getSingle, deleteItem,  updateItem} from '../actions';
 
 class ViewItem extends React.Component{
 
@@ -14,19 +14,33 @@ class ViewItem extends React.Component{
             document.querySelector('.modal').style="display: block";
         });
     }
-
+    updateItem(){
+        this.props.updateItem(this.props.match.params.id)
+        this.props.getSingle(this.props.match.params.id)
+    }
     render(){
         console.log("props",this.props);
         if(!this.props.single){
             return <h1>Loading...</h1>
         }
+        const timeCreated =new Date(parseInt(this.props.single.created)).toTimeString();
+
+
         return(
             <div>
                 <div className="row my-4 justify-content-end">
-                <Link className="btn btn-outline-primary" to="/">Back</Link>
+                    <Link className="btn btn-outline-primary" to="/">Back</Link>
                 </div>
                 <h1 className="text-center">{this.props.single.title}</h1>
+                <h3>Details: {this.props.single.details}</h3>
+                <h4>Time Created: {timeCreated}</h4>
+                <h4>Time Completed: {this.props.time ? this.props.time : ""} </h4>
+                <h4>Status: {this.props.single.complete ? "Complete" : "To Be Done"}</h4>
                 <button onClick={this.deleteItem.bind(this)} className="btn btn-outline-danger">DELETE TASK</button>
+                <div className="form-group">
+                    <label>Complete</label>
+                    <input onClick={this.updateItem.bind(this)} type="checkbox"/>
+                </div>
                 <div className="modal" tabIndex="-1" role="dialog">
                      <div className="modal-dialog" role="document">
                         <div className="modal-content">
@@ -53,10 +67,11 @@ class ViewItem extends React.Component{
 function mapStateToProps(state){
     return{
         single: state.todo.single,
-        msg: state.todo.msg
+        msg: state.todo.msg,
+        time: state.todo.time
     }
 }
 
 
 
-export default connect (mapStateToProps, { getSingle, deleteItem })(ViewItem)
+export default connect (mapStateToProps, { getSingle, deleteItem, updateItem })(ViewItem)
