@@ -36,7 +36,7 @@ class ViewItem extends React.Component{
                               <span aria-hidden="true">&times;</span>
                             </button>
                           </div>
-                          <div clasName="modal-body text-center">
+                          <div className="modal-body text-center">
                             <p>{this.props.msg}</p>
                           </div>
                           <div className="modal-footer">
@@ -44,7 +44,7 @@ class ViewItem extends React.Component{
                           </div>
                         </div>
                       </div>
-                    </div>
+                </div>
             </div>
         )
     }

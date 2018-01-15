@@ -11,9 +11,10 @@ class List extends React.Component{
     this.props.getItem();
   }
 
+
   render(){
     const list= this.props.list.map((list,i)=>{
-      return <ListItem {...list}  key={i} />
+      return <ListItem  {...list}  key={i} />
     })
     return(
       <div>
@@ -34,7 +35,8 @@ class List extends React.Component{
 
 function mapStateToProps(state){
   return{
-    list: state.todo.list
+    list: state.todo.list,
+    time: state.todo.time
   }
 }
 
